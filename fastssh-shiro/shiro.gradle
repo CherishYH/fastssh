@@ -1,0 +1,16 @@
+def shiroVersion = '1.2.0'
+def kaptchaVersion = '2.3.2'
+def ehcacheVersion = '2.5.2'
+
+repositories{
+    flatDir(dir:"${System.properties['user.home']}/tools/comm-lib",name: 'Local lib directory.')
+}
+dependencies{
+    compile "org.apache.shiro:shiro-all:$shiroVersion"
+    compile project(':fastssh-common')
+    compile name :'captcha-kaptcha',version: "$kaptchaVersion"
+    compile name :'ehcache-core',version: "$ehcacheVersion"
+    compile("org.apache.shiro:shiro-cas:$shiroVersion"){
+        exclude group:'javax.servlet',module:'servlet-api'
+    }
+}

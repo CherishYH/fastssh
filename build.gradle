@@ -1,0 +1,73 @@
+import com.cherish.xi.plugins.ProjectVersion
+import com.cherish.xi.plugins.ReleaseVersionTask
+def junitVersion = '4.9'
+def slf4jVersion = '1.6.4'
+def parsedConfig() {
+    def env = project.hasProperty('env') ? project.getProperty('env') : 'local'
+    logger.quiet "Loading configuraion for environment '$env'."
+    def configFile = file("$rootDir/gradle/config/buildConfig.groovy")
+    new ConfigSlurper(env).parse(configFile.toURL()).toProperties()
+}
+
+ext.versionFile = file('version.properties')
+ext.projectIds =['group':'com.cherish.xi']
+
+allprojects{
+    group = projectIds.group
+    version = readVersion()
+}
+subprojects{
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'eclipse'
+
+    repositories{
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        compile "org.slf4j:slf4j-api:$slf4jVersion"
+        testCompile(
+                "junit:junit:$junitVersion",
+        )
+    }
+
+    eclipse{
+        jdt{
+            sourceCompatibility = 1.7
+            targetCompatibility = 1.7
+        }
+        classpath{
+            downloadSources = true
+            downloadJavadoc = false
+        }
+    }
+    idea{
+        module{
+            downloadSources = true
+            downloadJavadoc = false
+        }
+    }
+
+    task makeReleaseVersion(type: ReleaseVersionTask){
+        release = version.release
+        destFile = versionFile
+    }
+}
+
+task wrapper(type: Wrapper){
+    gradleVersion = '2.7'
+}
+
+ProjectVersion readVersion(){
+    logger.quiet 'Readding the version file.'
+    if(!versionFile.exists()){
+        throw new GradleException("Required version file does not exist:$versionFile.canonicalPath")
+    }
+    Properties versionProps = new Properties();
+    versionFile.withInputStream{
+        stream -> versionProps.load(stream)
+    }
+    new ProjectVersion(versionProps.major.toInteger(),versionProps.minor.toInteger(),versionProps.release.toBoolean());
+}
