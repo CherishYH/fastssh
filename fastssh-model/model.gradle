@@ -1,7 +1,17 @@
+def hibernateVersion = '4.2.21.Final'
+def springDateVersion = '1.9.2.RELEASE'
 configurations {
     providedCompile
 }
-
+dependencies {
+    compile project(':fastssh-common')
+    providedCompile(
+            //Hibernate
+            "org.hibernate:hibernate-core:$hibernateVersion",
+            "org.hibernate:hibernate-entitymanager:$hibernateVersion",
+            "org.springframework.data:spring-data-jpa:$springDateVersion"
+    )
+}
 sourceSets.main.compileClasspath += configurations.providedCompile
 sourceSets.test.compileClasspath += configurations.providedCompile
 sourceSets.test.runtimeClasspath += configurations.providedCompile

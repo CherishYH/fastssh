@@ -25,7 +25,7 @@ dependencies{
     cargo "org.codehaus.cargo:cargo-core-uberjar:$cargoVersion", "org.codehaus.cargo:cargo-ant:$cargoVersion"
     compile project(':fastssh-shiro')
     compile project(':fastssh-db')
-
+    testCompile "org.springframework:spring-test:$springVersion"
     //项目需要的依赖
     compile(
             //Struts2

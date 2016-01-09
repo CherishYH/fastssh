@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="WebApp_ID" version="3.0">
     <description>FastSS+JPA集成</description>
@@ -10,20 +11,20 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath:spring/applicationContext.xml
+            classpath:spring/applicationContext.xml,
             classpath:spring/applicationContext-db.xml
         </param-value>
     </context-param>
 
-    <!--JPA在页面结束关闭Session过滤器-->
-    <!--<filter>-->
-        <!--<filter-name>OpenEntityManagerInViewFilter</filter-name>-->
-        <!--<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>-->
-    <!--</filter>-->
-    <!--<filter-mapping>-->
-        <!--<filter-name>OpenEntityManagerInViewFilter</filter-name>-->
-        <!--<url-pattern>*.html</url-pattern>-->
-    <!--</filter-mapping>-->
+    JPA在页面结束关闭Session过滤器
+    <filter>
+        <filter-name>OpenEntityManagerInViewFilter</filter-name>
+        <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>OpenEntityManagerInViewFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>
 
     <!--统一UTF-8编码过滤器 -->
     <filter>

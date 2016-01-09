@@ -2,7 +2,7 @@ environments{
     local{
         version = "20150330+"
         db{
-            driver="oracle.jdbc.driver.OracleDriver"
+            driver="com.mysql.jdbc.Driver"
             //BoneCP,C3P0,DBCP
             pool="BoneCP"
             timeout.in.secs=2
@@ -15,9 +15,9 @@ environments{
             bonecp.partition.count=2
             bonecp.min.conns.partition=1
             bonecp.max.conns.partition=10
-            url="jdbc:oracle:thin:@172.16.77.132:1521:orcl"
-            username="lightssh"
-            password="lightssh"
+            url="jdbc:mysql://127.0.0.1:8889/fastssh?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull"
+            username="root"
+            password="123456"
         }
         captcha{
             //#验证码captcha
@@ -45,7 +45,7 @@ environments{
     test{
         version = "20150330+"
         db{
-            driver="oracle.jdbc.driver.OracleDriver"
+            driver="com.mysql.jdbc.Driver"
             //BoneCP,C3P0,DBCP
             pool="BoneCP"
             timeout.in.secs=2
@@ -58,9 +58,9 @@ environments{
             bonecp.partition.count=2
             bonecp.min.conns.partition=1
             bonecp.max.conns.partition=10
-            url="jdbc:oracle:thin:@172.16.77.132:1521:orcl"
-            username="lightssh"
-            password="lightssh"
+            url="jdbc:mysql://127.0.0.1:8889/fastssh?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull"
+            username="root"
+            password="123456"
         }
         captcha{
             //#验证码captcha
@@ -88,7 +88,7 @@ environments{
     uat{
         version = "20150330+"
         db{
-            driver="oracle.jdbc.driver.OracleDriver"
+            driver="com.mysql.jdbc.Driver"
             //BoneCP,C3P0,DBCP
             pool="BoneCP"
             timeout.in.secs=2
@@ -101,9 +101,9 @@ environments{
             bonecp.partition.count=2
             bonecp.min.conns.partition=1
             bonecp.max.conns.partition=10
-            url="jdbc:oracle:thin:@172.16.77.132:1521:orcl"
-            username="lightssh"
-            password="lightssh"
+            url="jdbc:mysql://127.0.0.1:8889/fastssh?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull"
+            username="root"
+            password="123456"
         }
         captcha{
             //#验证码captcha
@@ -131,7 +131,7 @@ environments{
     prod{
         version = "20150330+"
         db{
-            driver="oracle.jdbc.driver.OracleDriver"
+            driver="com.mysql.jdbc.Driver"
             //BoneCP,C3P0,DBCP
             pool="BoneCP"
             timeout.in.secs=2
@@ -144,9 +144,9 @@ environments{
             bonecp.partition.count=2
             bonecp.min.conns.partition=1
             bonecp.max.conns.partition=10
-            url="jdbc:oracle:thin:@172.16.77.132:1521:orcl"
-            username="lightssh"
-            password="lightssh"
+            url="jdbc:mysql://127.0.0.1:8889/fastssh?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull"
+            username="root"
+            password="123456"
         }
         captcha{
             //#验证码captcha

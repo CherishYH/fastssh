@@ -3,16 +3,16 @@ def springDateVersion = '1.9.2.RELEASE'
 def springVersion = '4.2.4.RELEASE'
 def hibernateVersion = '4.2.21.Final'
 def dbcpVersion = '2.1.1'
-def boneCPVersion = '0.8.0.RELEASE'
+def boneCPVersion = '0.7.1.RELEASE'
 def c3p0Version = '0.9.5.2'
 def log4jdbcVersion = '0.2.7'
+def mysqlVersion = '5.1.35'
 configurations {
     providedCompile
 }
 
 dependencies {
     providedCompile "org.slf4j:slf4j-api:$slf4jVersion"
-    compile project(':fastssh-common')
     compile project(':fastssh-model')
     //Spring Data
     compile("org.springframework.data:spring-data-jpa:$springDateVersion"){
@@ -37,12 +37,17 @@ dependencies {
             "org.hibernate:hibernate-entitymanager:$hibernateVersion",
             //数据源
             "org.apache.commons:commons-dbcp2:$dbcpVersion",
-            "com.jolbox:bonecp:$boneCPVersion",
             "com.mchange:c3p0:$c3p0Version",
             //JDBC日志代理
-            "org.lazyluke:log4jdbc-remix:$log4jdbcVersion"
-
+            "org.lazyluke:log4jdbc-remix:$log4jdbcVersion",
+            //数据库驱动
+            "mysql:mysql-connector-java:$mysqlVersion",
     )
+    //bonecp
+    compile("com.jolbox:bonecp:$boneCPVersion"){
+        exclude group:'com.google.guava',module:'guava'
+        exclude group:'org.slf4j',module:'slf4j-api'
+    }
 }
 
 sourceSets.main.compileClasspath += configurations.providedCompile
