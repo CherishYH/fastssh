@@ -1,23 +1,174 @@
 environments{
     local{
+        version = "20150330+"
         db{
-            ip = 'localhost'
-            port = 3305
+            driver="oracle.jdbc.driver.OracleDriver"
+            //BoneCP,C3P0,DBCP
+            pool="BoneCP"
+            timeout.in.secs=2
+            //DBCP CONFIG
+            dbcp.initial.size=20
+            dbcp.max.idle=0
+            dbcp.max.active=50
+            //BoneCP CONFIG
+            bonecp.acquire.inc=1
+            bonecp.partition.count=2
+            bonecp.min.conns.partition=1
+            bonecp.max.conns.partition=10
+            url="jdbc:oracle:thin:@172.16.77.132:1521:orcl"
+            username="lightssh"
+            password="lightssh"
+        }
+        captcha{
+            //#验证码captcha
+            enabled=true
+            login.ignore.times=1
+        }
+        login{
+            //登录失败是否锁定
+            failure.lock.enabled=true
+            //登录帐户锁定的登录失败次数
+            failure.lock.times=5
+            //登录帐户锁定后恢复时间（分钟）
+            failure.lock.minutes=20
+        }
+        log{
+            //Action执行时间超过此配置输出日志
+            action.timing.enabled=true
+            action.timing.millis=2000
+
+            //SQL执行时间超过此配置输出日志
+            sql.timing.enabled=true
+            sql.timing.millis=800
         }
     }
     test{
+        version = "20150330+"
         db{
-            ip = '127.0.0.1'
-            port = 3305
+            driver="oracle.jdbc.driver.OracleDriver"
+            //BoneCP,C3P0,DBCP
+            pool="BoneCP"
+            timeout.in.secs=2
+            //DBCP CONFIG
+            dbcp.initial.size=20
+            dbcp.max.idle=0
+            dbcp.max.active=50
+            //BoneCP CONFIG
+            bonecp.acquire.inc=1
+            bonecp.partition.count=2
+            bonecp.min.conns.partition=1
+            bonecp.max.conns.partition=10
+            url="jdbc:oracle:thin:@172.16.77.132:1521:orcl"
+            username="lightssh"
+            password="lightssh"
+        }
+        captcha{
+            //#验证码captcha
+            enabled=true
+            login.ignore.times=1
+        }
+        login{
+            //登录失败是否锁定
+            failure.lock.enabled=true
+            //登录帐户锁定的登录失败次数
+            failure.lock.times=5
+            //登录帐户锁定后恢复时间（分钟）
+            failure.lock.minutes=20
+        }
+        log{
+            //Action执行时间超过此配置输出日志
+            action.timing.enabled=true
+            action.timing.millis=2000
+
+            //SQL执行时间超过此配置输出日志
+            sql.timing.enabled=true
+            sql.timing.millis=800
         }
     }
     uat{
+        version = "20150330+"
         db{
-            ip = '192.168.1.10'
-            port = 3305
+            driver="oracle.jdbc.driver.OracleDriver"
+            //BoneCP,C3P0,DBCP
+            pool="BoneCP"
+            timeout.in.secs=2
+            //DBCP CONFIG
+            dbcp.initial.size=20
+            dbcp.max.idle=0
+            dbcp.max.active=50
+            //BoneCP CONFIG
+            bonecp.acquire.inc=1
+            bonecp.partition.count=2
+            bonecp.min.conns.partition=1
+            bonecp.max.conns.partition=10
+            url="jdbc:oracle:thin:@172.16.77.132:1521:orcl"
+            username="lightssh"
+            password="lightssh"
+        }
+        captcha{
+            //#验证码captcha
+            enabled=true
+            login.ignore.times=1
+        }
+        login{
+            //登录失败是否锁定
+            failure.lock.enabled=true
+            //登录帐户锁定的登录失败次数
+            failure.lock.times=5
+            //登录帐户锁定后恢复时间（分钟）
+            failure.lock.minutes=20
+        }
+        log{
+            //Action执行时间超过此配置输出日志
+            action.timing.enabled=true
+            action.timing.millis=2000
+
+            //SQL执行时间超过此配置输出日志
+            sql.timing.enabled=true
+            sql.timing.millis=800
         }
     }
     prod{
+        version = "20150330+"
+        db{
+            driver="oracle.jdbc.driver.OracleDriver"
+            //BoneCP,C3P0,DBCP
+            pool="BoneCP"
+            timeout.in.secs=2
+            //DBCP CONFIG
+            dbcp.initial.size=20
+            dbcp.max.idle=0
+            dbcp.max.active=50
+            //BoneCP CONFIG
+            bonecp.acquire.inc=1
+            bonecp.partition.count=2
+            bonecp.min.conns.partition=1
+            bonecp.max.conns.partition=10
+            url="jdbc:oracle:thin:@172.16.77.132:1521:orcl"
+            username="lightssh"
+            password="lightssh"
+        }
+        captcha{
+            //#验证码captcha
+            enabled=true
+            login.ignore.times=1
+        }
+        login{
+            //登录失败是否锁定
+            failure.lock.enabled=true
+            //登录帐户锁定的登录失败次数
+            failure.lock.times=5
+            //登录帐户锁定后恢复时间（分钟）
+            failure.lock.minutes=20
+        }
+        log{
+            //Action执行时间超过此配置输出日志
+            action.timing.enabled=true
+            action.timing.millis=2000
 
+            //SQL执行时间超过此配置输出日志
+            sql.timing.enabled=true
+            sql.timing.millis=800
+        }
     }
 }

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.action.extension" value="html"/>
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+    <constant name="struts.ui.theme" value="colorful"/>
+    <constant name="struts.multipart.maxSize" value="10485760"/>
+    <constant name="struts.devMode" value="false"/>
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <constant name="struts.custom.i18n.resources" value="config.i18n.message"/>
+    <constant name="struts.configuration.xml.reload" value="false"/>
+    <!-- this option will use a internal ConcurrentHashMap in FreemarkerTemplateEngine but not freemarker native cache -->
+	<constant name="struts.freemarker.templatesCache" value="false"/>
+	<constant name="struts.multipart.saveDir" value="../temp"/>
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- 注解配置 -->
+	<constant name="struts.convention.package.locators" value="com.ylink.fastssh" />
+	<constant name="struts.convention.action.disableScanning" value="false" />
+	<constant name="struts.convention.action.packages" value="com.ylink.fastssh" />
+    <constant name="struts.convention.action.mapAllMatches" value="true" />
+    <constant name="struts.convention.action.includeJars" value=".*?\.jar(!/|/)?" />
+    <constant name="struts.convention.action.fileProtocols" value="jar,zip" />
+
+    <package name="default" extends="json-default" namespace="/">
+    	<result-types>
+        	<result-type name="image" class="com.ylink.fastssh.project.basic.web.result.ImageResult" />
+        </result-types>
+
+        <interceptors>
+        	<interceptor name="runningTime" class="com.ylink.fastssh.project.basic.web.interceptor.RunningTimeInterceptor"/>
+        	<interceptor name="trim" class="com.ylink.fastssh.project.basic.web.interceptor.TrimInterceptor"/>
+        	<interceptor name="mytoken" class="com.ylink.fastssh.project.basic.web.interceptor.MyTokenInterceptor"/>
+        	<interceptor name="myJsonValidation" class="com.ylink.fastssh.project.basic.web.interceptor.JsonValidationInterceptor"/>
+
+			<interceptor-stack name="simpleDefaultStack">
+				<interceptor-ref name="runningTime" />
+				<interceptor-ref name="trim" />
+                <interceptor-ref name="exception">
+                	<param name="logEnabled">true</param>
+                	<param name="logLevel">ERROR</param>
+                </interceptor-ref>
+                <interceptor-ref name="alias"/>
+                <interceptor-ref name="servletConfig"/>
+                <interceptor-ref name="i18n"/>
+                <interceptor-ref name="prepare"/>
+                <interceptor-ref name="chain"/>
+                <interceptor-ref name="debugging"/>
+                <interceptor-ref name="scopedModelDriven"/>
+                <interceptor-ref name="modelDriven"/>
+                <interceptor-ref name="fileUpload">
+                	 <!-- 配置允许上传的文件类型-->
+		             <param name="allowedTypes">image/bmp,image/png,image/gif,image/jpg,
+		                 image/jpeg,image/pjpeg,image/x-png</param>
+		             <!-- 配置允许上传文件的大小(单位字节)-->
+		              <param name="maximumSize">10485760</param>
+		        </interceptor-ref>
+                <interceptor-ref name="checkbox"/>
+                <interceptor-ref name="multiselect"/>
+                <interceptor-ref name="staticParams"/>
+                <interceptor-ref name="actionMappingParams"/>
+                <interceptor-ref name="params">
+                  <param name="excludeParams">dojo\..*,^struts\..*</param>
+                </interceptor-ref>
+                <interceptor-ref name="conversionError"/>
+                <interceptor-ref name="validation">
+                    <param name="excludeMethods">input,back,cancel,browse</param>
+                </interceptor-ref>
+                <interceptor-ref name="myJsonValidation"/>
+                <interceptor-ref name="workflow">
+                    <param name="excludeMethods">input,back,cancel,browse</param>
+                </interceptor-ref>
+            </interceptor-stack>
+
+			<interceptor-stack name="crudStack">
+				<interceptor-ref name="mytoken"/>
+				<interceptor-ref name="simpleDefaultStack" />
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="simpleDefaultStack"/>
+
+        <!--<global-results>-->
+            <!--<result name="login" type="redirectAction">login</result>-->
+            <!--<result name="unknownException">/pages/system/error.jsp</result>-->
+            <!--<result name="invalid.token">/pages/system/invalid_token.jsp</result>-->
+            <!--<result name="notfound">/pages/system/notfound.jsp</result>-->
+        <!--</global-results>-->
+
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="unknownException"/>
+        </global-exception-mappings>
+
+        <!--&lt;!&ndash; 403 PAGE &ndash;&gt;-->
+        <!--<action name="403" class="securityAction">-->
+            <!--<result name="success">/pages/system/403.jsp</result>-->
+        <!--</action>-->
+
+        <!--&lt;!&ndash; HOME PAGE &ndash;&gt;-->
+        <!--<action name="welcome" class="securityAction">-->
+        	<!--<result name="input">/pages/home.jsp</result>-->
+            <!--<result name="success">/pages/home.jsp</result>-->
+        <!--</action>-->
+        <!---->
+        <!--&lt;!&ndash; HEADER PAGE &ndash;&gt;-->
+        <!--<action name="header" class="securityAction">-->
+        	<!--<result name="input">/pages/common/layout/header.jsp</result>-->
+        	<!--<result name="success">/pages/common/layout/header.jsp</result>-->
+        <!--</action>-->
+        <!---->
+        <!--&lt;!&ndash; BOTTOM PAGE &ndash;&gt;-->
+        <!--<action name="footer" class="securityAction">-->
+        	<!--<result name="success">/pages/common/layout/footer.jsp</result>-->
+        <!--</action>-->
+        <!---->
+        <!--&lt;!&ndash; SWITCH PAGE &ndash;&gt;-->
+        <!--<action name="switch" class="securityAction">-->
+        	<!--<result name="success">/pages/common/layout/switch.jsp</result>-->
+        <!--</action>-->
+        <!---->
+        <!--&lt;!&ndash; NAVIGATION PAGE &ndash;&gt;-->
+        <!--<action name="navigation" class="securityAction">-->
+        	<!--<result name="input">/pages/common/layout/navigation_vertical.jsp</result>-->
+        	<!--<result name="success">/pages/common/layout/navigation_vertical.jsp</result>-->
+        <!--</action>-->
+        <!---->
+        <!--&lt;!&ndash; PANEL PAGE &ndash;&gt;-->
+        <!--<action name="panel" class="securityAction">-->
+        	<!--<result name="input">/pages/system/panel.jsp</result>-->
+        	<!--<result name="success">/pages/system/panel.jsp</result>-->
+        <!--</action>-->
+        <!---->
+        <!--&lt;!&ndash; PANEL PAGE &ndash;&gt;-->
+        <!--<action name="main" class="securityAction">-->
+        	<!--<result name="success">/pages/system/main.jsp</result>-->
+        <!--</action>-->
+        <!---->
+        <!--&lt;!&ndash; SHOW CAPTCHA &ndash;&gt;-->
+        <!--<action name="showcaptcha" class="securityAction" method="showCaptcha">-->
+        	<!--<result name="success" type="json">-->
+        		<!--<param name="includeProperties">show</param>-->
+        	<!--</result>-->
+       	<!--</action>-->
+        <!---->
+        <!--&lt;!&ndash; LOGIN PAGE &ndash;&gt;-->
+        <!--<action name="login" class="securityAction" method="login">-->
+        	<!--<result name="input">/pages/system/login.jsp</result>-->
+        	<!--<result name="success" type="redirectAction">welcome</result>-->
+        <!--</action>-->
+        <!---->
+        <!--&lt;!&ndash; LOGOUT  &ndash;&gt;-->
+        <!--<action name="logout" class="securityAction" method="logout">-->
+        	<!--&lt;!&ndash;<result name="success">/pages/system/logout.jsp</result>&ndash;&gt;-->
+        	<!--<result name="success" type="redirectAction">login</result>-->
+        <!--</action>-->
+        <!---->
+        <!--&lt;!&ndash; CAS TICKET ERROR &ndash;&gt;-->
+        <!--<action name="casticketerror" class="securityAction">-->
+        	<!--<result name="success">/pages/system/cas_ticket_error.jsp</result>-->
+        <!--</action>-->
+        <!---->
+        <!--&lt;!&ndash; 401 ERROR PAGE &ndash;&gt;-->
+        <!--<action name="401" class="securityAction">-->
+        	<!--<result name="success">/pages/system/401.jsp</result>-->
+        <!--</action>-->
+        <!---->
+        <!--&lt;!&ndash; MULTI POPUP DATA&ndash;&gt;-->
+        <!--<action name="multipopup" class="securityAction">-->
+        	<!--<result name="success">/pages/common/layout/multi_popup.jsp</result>-->
+        <!--</action>-->
+        <!---->
+        <!--&lt;!&ndash; MULTI POPUP SELECT&ndash;&gt;-->
+        <!--<action name="multipopupselect" class="securityAction">-->
+        	<!--<result name="success">/pages/common/layout/multi_popup_select.jsp</result>-->
+        <!--</action>-->
+        <!---->
+		<action name="index" class="securityAction">
+			<result name="success">/pages/index.jsp</result>
+		</action>
+    </package>
+</struts>
+

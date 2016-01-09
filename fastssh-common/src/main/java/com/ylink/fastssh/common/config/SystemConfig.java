@@ -105,7 +105,7 @@ public abstract class SystemConfig implements Serializable{
      * @throws UnsupportedEncodingException
      */
     protected File getDefaultConfigFile( ){
-        String path = "classpath:config/" + getProjectName() + ".properties";
+        String path = "classpath:" + getProjectName() + ".properties";
         try{
             File resource = ResourceUtils.getFile(path);
             return resource;

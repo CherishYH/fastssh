@@ -1,0 +1,50 @@
+def slf4jVersion = '1.6.4'
+def springDateVersion = '1.9.2.RELEASE'
+def springVersion = '4.2.4.RELEASE'
+def hibernateVersion = '4.2.21.Final'
+def dbcpVersion = '2.1.1'
+def boneCPVersion = '0.8.0.RELEASE'
+def c3p0Version = '0.9.5.2'
+def log4jdbcVersion = '0.2.7'
+configurations {
+    providedCompile
+}
+
+dependencies {
+    providedCompile "org.slf4j:slf4j-api:$slf4jVersion"
+    compile project(':fastssh-common')
+    compile project(':fastssh-model')
+    //Spring Data
+    compile("org.springframework.data:spring-data-jpa:$springDateVersion"){
+        //忽略自生Spring依赖
+        exclude group:'org.springframework',module:'spring-core'
+        exclude group:'org.springframework',module:'spring-context'
+        exclude group:'org.springframework',module:'spring-orm'
+        exclude group:'org.springframework',module:'spring-tx'
+        exclude group:'org.springframework',module:'spring-beans'
+        exclude group:'org.springframework',module:'spring-aop'
+        exclude group:'org.slf4j',module:'slf4j-api'
+        exclude group:'org.slf4j',module:'jcl-over-slf4j'
+    }
+    compile(
+            //Spring
+            "org.springframework:spring-core:$springVersion",
+            "org.springframework:spring-web:$springVersion",
+            "org.springframework:spring-context:$springVersion",
+            "org.springframework:spring-orm:$springVersion",
+            //Hibernate
+            "org.hibernate:hibernate-core:$hibernateVersion",
+            "org.hibernate:hibernate-entitymanager:$hibernateVersion",
+            //数据源
+            "org.apache.commons:commons-dbcp2:$dbcpVersion",
+            "com.jolbox:bonecp:$boneCPVersion",
+            "com.mchange:c3p0:$c3p0Version",
+            //JDBC日志代理
+            "org.lazyluke:log4jdbc-remix:$log4jdbcVersion"
+
+    )
+}
+
+sourceSets.main.compileClasspath += configurations.providedCompile
+sourceSets.test.compileClasspath += configurations.providedCompile
+sourceSets.test.runtimeClasspath += configurations.providedCompile

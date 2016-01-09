@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+	   http://www.springframework.org/schema/tx
+	   http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+	   http://www.springframework.org/schema/data/jpa
+	   http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd" default-lazy-init="true">
+
+    <jpa:repositories
+            base-package="com.ylink.fastssh.**.dao"
+            repository-impl-postfix="Impl"
+            entity-manager-factory-ref="entityManagerFactory"
+            transaction-manager-ref="transactionManager"
+    />
+
+    <!--业务层事务控制-->
+    <aop:config>
+        <aop:advisor id="managerTx" advice-ref="txAdvice" pointcut="execution(* com.ylink.fastssh..*.*Manager.*(..))"/>
+    </aop:config>
+
+    <!--事务控制织面配置-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="list*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="load*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="is*" propagation="SUPPORTS" read-only="true"/>
+
+            <tx:method name="*" timeout="20"/>
+            <tx:method name="writeSystemLog" propagation="REQUIRES_NEW" timeout="30"/>
+            <tx:method name="newTransaction*" propagation="REQUIRES_NEW" timeout="30"/>
+        </tx:attributes>
+    </tx:advice>
+
+
+    <!--注解事务-->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+
+    <bean id="dataSourceFactory" class="com.ylink.fastssh.project.basic.db.config.DataSourceFactory">
+        <property name="systemConfig" ref="systemConfig"/>
+    </bean>
+    <bean id="dataSourceSpied" factory-bean="dataSourceFactory" factory-method="createDataSource"/>
+
+    <!-- data source -->
+    <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+        <constructor-arg ref="dataSourceSpied" />
+        <property name="logFormatter">
+            <bean class="com.ylink.fastssh.project.basic.db.config.JdbcLogCustomFormatter">
+                <property name="systemConfig" ref="systemConfig" />
+                <property name="loggingType" value="MULTI_LINE" />
+                <property name="sqlPrefix" value="SQL: " />
+            </bean>
+        </property>
+    </bean>
+
+    <!--JPA消息管理器-->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="com.ylink.fastssh"/>
+        <property name="persistenceProvider">
+            <bean class="org.hibernate.ejb.HibernatePersistence"/>
+        </property>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="generateDdl" value="false"/>
+                <property name="database" value="MYSQL"/>
+                <property name="databasePlatform" value="org.hibernate.dialect.MySQLInnoDBDialect"/>
+                <property name="showSql" value="false"/>
+            </bean>
+        </property>
+        <property name="jpaDialect">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
+        </property>
+        <property name="jpaPropertyMap">
+            <map>
+                <!--将Hibernate查询中的符号映射到SQL查询中的符号 (符号可能是函数名或常量名字)-->
+                <entry key="hibernate.query.substitutions" value="true 1, false 0, yes 'Y', no 'N'"/>
+                <!--为Hibernate关联的批量抓取设置默认数量. 取值 建议的取值为4, 8, 和16-->
+                <entry key="hibernate.default_batch_fetch_size" value="16"/>
+                <!--为单向关联(一对一, 多对一)的外连接抓取（outer join fetch）树设置最大深度. 值为0意味着将关闭默认的外连接抓取-->
+                <entry key="hibernate.max_fetch_depth" value="2"/>
+                <!-- Hibernate将收集有助于性能调节的统计数据 -->
+                <entry key="hibernate.generate_statistics" value="true"/>
+                <entry key="hibernate.bytecode.use_reflection_optimizer" value="true"/>
+                <!--禁止使用二级缓存-->
+                <entry key="hibernate.cache.use_second_level_cache" value="false"/>
+                <!--允许查询缓存, 个别查询仍然需要被设置为可缓存的-->
+                <entry key="hibernate.cache.use_query_cache" value="false"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+</beans>

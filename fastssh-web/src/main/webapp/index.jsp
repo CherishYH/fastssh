@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <html>
 <head>
-    <title>Title</title>
 </head>
 <body>
-    <h4>Hello World</h4>
+    <c:redirect url="/index.html"/>
 </body>
 </html>

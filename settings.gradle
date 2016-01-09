@@ -1,4 +1,4 @@
-include 'fastssh-common','fastssh-db','fastssh-shiro','fastssh-web'
+include 'fastssh-common','fastssh-db','fastssh-shiro','fastssh-web','fastssh-model'
 rootProject.name = 'fastssh'
 rootProject.children.each {
     it.buildFileName = it.name+ '.gradle' - 'fastssh-'
