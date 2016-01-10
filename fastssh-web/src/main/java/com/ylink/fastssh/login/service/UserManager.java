@@ -8,5 +8,4 @@ import com.ylink.fastssh.project.entity.User;
  * data 16/1/10
  */
 public interface UserManager extends BaseManager<User,String>{
-
 }

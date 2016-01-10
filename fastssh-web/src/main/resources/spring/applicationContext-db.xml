@@ -16,7 +16,7 @@
 
     <jpa:repositories
             base-package="com.ylink.fastssh.**.dao"
-            repository-impl-postfix="Impl"
+            repository-impl-postfix="Jpa"
             entity-manager-factory-ref="entityManagerFactory"
             transaction-manager-ref="transactionManager"
     />
@@ -42,8 +42,9 @@
     </tx:advice>
 
 
-    <!--注解事务-->
+    <!--注解事务
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+    -->
 
     <bean id="dataSourceFactory" class="com.ylink.fastssh.project.basic.db.config.DataSourceFactory">
         <property name="systemConfig" ref="systemConfig"/>
@@ -74,7 +75,7 @@
                 <property name="generateDdl" value="false"/>
                 <property name="database" value="MYSQL"/>
                 <property name="databasePlatform" value="org.hibernate.dialect.MySQLInnoDBDialect"/>
-                <property name="showSql" value="false"/>
+                <property name="showSql" value="true"/>
             </bean>
         </property>
         <property name="jpaDialect">
