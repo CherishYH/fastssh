@@ -1,0 +1,167 @@
+/* NAV TABS */
+.nav-menu-tabs-custom {
+    margin: auto;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    line-height: 30px;
+    height: 45px;
+    position:relative
+}
+.nav-menu-tabs-custom ul li{
+    float:left;
+    display:inline;
+    vertical-align:top;
+    text-align: center;
+    height:45px;
+    line-height:30px;
+    list-style:none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.nav-menu-tabs-custom ul {
+    margin:0;
+    padding:0;
+    position: absolute;
+}
+.tabs-menu{
+    float:left;
+    overflow:hidden;
+    height:45px;
+    line-height: 30px;
+    position:relative;
+    width: 94%;
+}
+.nav-menu-tabs-custom .button-move-left{
+    float:left;
+    height:100%;
+    line-height:30px;
+    font-size:16px;
+    width:25px;
+    text-align:center;
+    margin-top: 15px;
+}
+.nav-menu-tabs-custom .button-move-right{
+    float:right;
+    height:100%;
+    line-height:30px;
+    font-size:16px;
+    width:25px;
+    text-align:center;
+    margin-top: 15px;
+}
+.tab-close{
+    float: right;
+    margin-top: 6px;
+    margin-right: 3px;
+}
+.tabs-menu > .nav-tabs > li:not(.active) > .tab-close{
+    display: none;
+}
+.tabs-menu > .nav-tabs > li.active > .tab-close{
+    display: block;
+}
+.tabs-menu > .nav-tabs > li:hover > .tab-close{
+    display: block;
+}
+.tabs-menu > .nav-tabs > li:focus > .tab-close{
+    display: none;
+}
+.tabs-menu > .nav-tabs {
+    margin: 0;
+    border-bottom-color: #f4f4f4;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    margin:0;
+    padding:0;
+}
+.tabs-menu > .nav-tabs > li {
+    border-top: 3px solid transparent;
+    margin-bottom: -2px;
+    margin-right: 5px;
+    width: 95px;
+}
+.tabs-menu > .nav-tabs > li > a {
+    color: #444;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-color: #f4f4f4;
+    border-left-color: #f4f4f4;
+    border-right-color: #f4f4f4;
+}
+.tabs-menu > .nav-tabs > li > a.text-muted {
+    color: #999;
+}
+.tabs-menu > .nav-tabs > li > a,
+.tabs-menu > .nav-tabs > li > a:hover {
+    background: transparent;
+    margin: 0;
+}
+.tabs-menu > .nav-tabs > li > a:hover {
+    color: #9cc2cb;
+}
+.tabs-menu > .nav-tabs > li:not(.active) > a:hover,
+.tabs-menu > .nav-tabs > li:not(.active) > a:focus,
+.tabs-menu > .nav-tabs > li:not(.active) > a:active {
+    border-color: #9cc2cb;
+}
+.tabs-menu > .nav-tabs > li.active {
+    border-top-color: #3c8dbc;
+}
+.tabs-menu > .nav-tabs > li.active > a,
+.tabs-menu > .nav-tabs > li.active:hover > a {
+    background: transparent;
+    color: #444;
+}
+.tabs-menu > .nav-tabs > li.active > a {
+    border-top-color: transparent;
+    border-left-color: #f4f4f4;
+    border-right-color: #f4f4f4;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.tabs-menu > .nav-tabs > li:first-of-type {
+    margin-left: 0;
+}
+.tabs-menu > .nav-tabs > li:first-of-type.active > a {
+    border-left-color: transparent;
+}
+.tabs-menu > .nav-tabs.pull-right {
+    float: none!important;
+}
+.tabs-menu > .nav-tabs.pull-right > li {
+    float: right;
+}
+.tabs-menu > .nav-tabs.pull-right > li:first-of-type {
+    margin-right: 0;
+}
+.tabs-menu > .nav-tabs.pull-right > li:first-of-type > a {
+    border-left-width: 1px;
+}
+.tabs-menu > .nav-tabs.pull-right > li:first-of-type.active > a {
+    border-left-color: #f4f4f4;
+    border-right-color: transparent;
+}
+.tabs-menu > .nav-tabs > li.header {
+    line-height: 35px;
+    padding: 0 10px;
+    font-size: 20px;
+    color: #444;
+}
+.tabs-menu > .nav-tabs > li.header > .fa,
+.tabs-menu > .nav-tabs > li.header > .glyphicon,
+.tabs-menu > .nav-tabs > li.header > .ion {
+    margin-right: 5px;
+}
+.tabs-menu > .tab-content {
+    background: transparent;
+    padding: 10px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+.tabs-menu .dropdown.open > a:active,
+.tabs-menu .dropdown.open > a:focus {
+    background: transparent;
+    color: #999;
+}

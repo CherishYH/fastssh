@@ -1,3 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sitemesh xmlns="http://sitemesh.org/xml/config">
+<sitemesh>
+    <mapping path="/*" decorator="/pages/common/decorator/backgroud.jsp" />
 </sitemesh>

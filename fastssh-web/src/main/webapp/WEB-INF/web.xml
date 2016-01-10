@@ -50,6 +50,17 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!--装饰器 过滤器-->
+    <filter>
+        <filter-name>sitemesh</filter-name>
+        <filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>sitemesh</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <!--Struts2配置-->
     <filter>
         <filter-name>struts2</filter-name>
@@ -60,17 +71,6 @@
         <url-pattern>*.html</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
-    </filter-mapping>
-
-    <!--装饰器 过滤器-->
-    <filter>
-        <filter-name>sitemesh</filter-name>
-        <filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>sitemesh</filter-name>
-        <url-pattern>/*</url-pattern>
     </filter-mapping>
 
     <!-- logback 配置 -->

@@ -4,6 +4,6 @@
 <head>
 </head>
 <body>
-    <c:redirect url="/index.html"/>
+    <c:redirect url="/main.html"/>
 </body>
 </html>

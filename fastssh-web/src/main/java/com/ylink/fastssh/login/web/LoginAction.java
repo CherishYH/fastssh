@@ -27,4 +27,11 @@ public class LoginAction extends BaseAction{
         return SUCCESS;
     }
 
+
+    @Action(value = "test",results = {
+            @Result(name = "success", location = "/pages/test/LoginAction_test.jsp")
+    })
+    public String test(){
+        return SUCCESS;
+    }
 }

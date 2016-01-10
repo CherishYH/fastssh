@@ -179,6 +179,9 @@
         	<!--<result name="success">/pages/common/layout/multi_popup_select.jsp</result>-->
         <!--</action>-->
         <!---->
+        <action name="main" class="securityAction">
+            <result name="success">/pages/home/main.jsp</result>
+        </action>
 		<action name="index" class="securityAction">
 			<result name="success">/pages/index.jsp</result>
 		</action>
