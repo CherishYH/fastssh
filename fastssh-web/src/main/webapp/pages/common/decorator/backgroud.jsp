@@ -36,6 +36,10 @@
         <script src="<%=contextPath%>/js/html5shiv.min.js"></script>
         <script src="<%=contextPath%>/js/respond.js"></script>
         <![endif]-->
+        <!-- jQuery 2.1.4 -->
+        <script src="<%=contextPath%>/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+        <!-- jQuery UI 1.11.4 -->
+        <script src="<%=contextPath%>/js/jquery-ui.min.js"></script>
         <sitemesh:write property='head'/>
         <title><sitemesh:write property='title'/></title>
         <script type="text/javascript">
@@ -45,10 +49,6 @@
     </head>
     <body class="<sitemesh:write property='body.class'/>">
         <sitemesh:write property='body'/>
-        <!-- jQuery 2.1.4 -->
-        <script src="<%=contextPath%>/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-        <!-- jQuery UI 1.11.4 -->
-        <script src="<%=contextPath%>/js/jquery-ui.min.js"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
         <!-- Bootstrap 3.3.5 -->
         <script src="<%=contextPath%>/bootstrap/js/bootstrap.js"></script>

@@ -6,14 +6,13 @@
         <link rel="stylesheet" charset="utf-8" href="<%=contextPath%>/css/menu-tabs.css">
         <!--iframes自动适应宽高-->
         <script type="text/javascript" language="javascript">
-            function iFrameHeight() {
+           function iFrameHeight() {
                 var ifm= document.getElementById("iframepage");
                 var subWeb = document.frames ? document.frames["iframepage"].document : ifm.contentDocument;
                 if(ifm != null && subWeb != null) {
                     ifm.height = subWeb.body.scrollHeight;
-                    ifm.width = subWeb.body.scrollWidth;
                 }
-            }
+           }
         </script>
         <title>FastSSH 管理平台</title>
     </head>
@@ -204,76 +203,47 @@
                     <%--</form>--%>
                     <!--导航搜索 暂时屏蔽-->
                     <!--导航主体-->
-                    <ul class="sidebar-menu">
+                    <ul class="sidebar-menu" id="system_menu">
                         <li class="header">管理菜单</li>
                         <li class="active treeview">
                             <a href="#">
-                                <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+                                <i class="fa fa-dashboard"></i> <span>系统设置</span> <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                                <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                                <li class="active"><a href="javascript:void(0)" class="fast-system-menu" data-src="main.html" ><i class="fa fa-circle-o"></i>用户管理</a></li>
+                                <li><a href="javascript:void(0)" class="fast-system-menu" data-src="main.html"><i class="fa fa-circle-o"></i>角色管理</a></li>
                             </ul>
                         </li>
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-share"></i> <span>Multilevel</span>
+                                <i class="fa fa-share"></i> <span>多级菜单</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+                                <li><a href="#" data-src="main.html" class="fast-system-menu"><i class="fa fa-circle-o"></i>一级菜单</a></li>
                                 <li>
-                                    <a href="#"><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
+                                    <a href="#"><i class="fa fa-circle-o"></i>二级菜单<i class="fa fa-angle-left pull-right"></i></a>
                                     <ul class="treeview-menu">
-                                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
+                                        <li><a href="#" data-src="main.html" class="fast-system-menu"><i class="fa fa-circle-o"></i>二级菜单</a></li>
                                         <li>
-                                            <a href="#"><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
+                                            <a href="#"><i class="fa fa-circle-o"></i>三级菜单<i class="fa fa-angle-left pull-right"></i></a>
                                             <ul class="treeview-menu">
-                                                <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                                <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                                                <li><a href="#" data-src="main.html" class="fast-system-menu"><i class="fa fa-circle-o"></i>三级菜单一</a></li>
+                                                <li><a href="#" data-src="main.html" class="fast-system-menu"><i class="fa fa-circle-o"></i>三级菜单二</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+                                <li><a href="#" class="fast-system-menu" data-src="main.html"><i class="fa fa-circle-o"></i>一级菜单二</a></li>
                             </ul>
                         </li>
-                        <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+                        <li><a href="#" class="fast-system-menu" data-src="main.html"><i class="fa fa-book" ></i> <span>工作日历</span></a></li>
                         <li class="header">LABELS</li>
-                        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+                        <li><a href="#" class="fast-system-menu" data-src="main.html"><i class="fa fa-circle-o text-red"></i> <span>菜单设置</span></a></li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
             </aside>
-
-            <script>
-                window.onload=function(){
-                    var oBox=document.getElementById('menu-tabs-box');
-                    var aSpan=oBox.getElementsByTagName('span');
-                    var oMenu=oBox.getElementsByTagName('div')[0];
-                    var oUl=oMenu.getElementsByTagName('ul')[0];
-                    var aLi=oUl.getElementsByTagName('li');
-                    var iW=0;
-                    for(var i=0;i<aLi.length;i++)
-                    {
-                        iW+=aLi[i].offsetWidth;
-                    }
-                    oUl.style.width=iW+'px';
-                    aSpan[0].onclick=function()
-                    {
-                        var iLeft=oUl.offsetLeft+50;
-                        iLeft>=0&&(iLeft=0);
-                        oUl.style.left=iLeft+'px';
-                    }
-                    aSpan[1].onclick=function()
-                    {
-                        var iLeft=oUl.offsetLeft-50;
-                        var maxLeft=oMenu.offsetWidth-oUl.offsetWidth;
-                        iLeft<=maxLeft&&(iLeft=maxLeft);
-                        oUl.style.left=iLeft+'px';
-                    }
-                }
-            </script>
             <!-- 页面主体 -->
             <div class="content-wrapper">
                 <section class="content">
@@ -281,97 +251,15 @@
                         <div class="col-md-12">
                             <div class="nav-tabs-custom">
                                 <div class="nav-menu-tabs-custom" id="menu-tabs-box">
-                                    <span class="button-move-left glyphicon glyphicon-backward"></span>
+                                    <span class="button-move-left glyphicon glyphicon-backward menu-move-button" id="button-move-left"></span>
                                     <div class="tabs-menu">
                                         <ul class="nav nav-tabs">
-                                            <li class="active"><a href="#activity" data-toggle="tab">首页</a></li>
-                                            <li>
-                                                <div class="tab-close">
-                                                    <i class="fa fa-fw fa-close" title="关闭"></i>
-                                                </div>
-                                                <a href="#settings" data-toggle="tab">系统设置</a>
-                                            </li>
-                                            <li>
-                                                <div class="tab-close">
-                                                    <i class="fa fa-fw fa-close" title="关闭"></i>
-                                                </div>
-                                                <a href="#settings" data-toggle="tab">系统设置</a>
-                                            </li>
-                                            <li>
-                                                <div class="tab-close">
-                                                    <i class="fa fa-fw fa-close" title="关闭"></i>
-                                                </div>
-                                                <a href="#settings" data-toggle="tab">系统设置</a>
-                                            </li>
-                                            <li>
-                                                <div class="tab-close">
-                                                    <i class="fa fa-fw fa-close" title="关闭"></i>
-                                                </div>
-                                                <a href="#settings" data-toggle="tab">系统设置</a>
-                                            </li>
-                                            <li>
-                                                <div class="tab-close">
-                                                    <i class="fa fa-fw fa-close" title="关闭"></i>
-                                                </div>
-                                                <a href="#settings" data-toggle="tab">系统设置</a>
-                                            </li>
-                                            <li>
-                                                <div class="tab-close">
-                                                    <i class="fa fa-fw fa-close" title="关闭"></i>
-                                                </div>
-                                                <a href="#settings" data-toggle="tab">系统设置</a>
-                                            </li>
-                                            <li>
-                                                <div class="tab-close">
-                                                    <i class="fa fa-fw fa-close" title="关闭"></i>
-                                                </div>
-                                                <a href="#settings" data-toggle="tab">系统设置</a>
-                                            </li>
-                                            <li>
-                                                <div class="tab-close">
-                                                    <i class="fa fa-fw fa-close" title="关闭"></i>
-                                                </div>
-                                                <a href="#settings" data-toggle="tab">系统设置</a>
-                                            </li>
-                                            <li>
-                                                <div class="tab-close">
-                                                    <i class="fa fa-fw fa-close" title="关闭"></i>
-                                                </div>
-                                                <a href="#settings" data-toggle="tab">系统设置</a>
-                                            </li>
-                                            <li>
-                                                <div class="tab-close">
-                                                    <i class="fa fa-fw fa-close" title="关闭"></i>
-                                                </div>
-                                                <a href="#settings" data-toggle="tab">系统设置</a>
-                                            </li>
-                                            <li>
-                                                <div class="tab-close">
-                                                    <i class="fa fa-fw fa-close" title="关闭"></i>
-                                                </div>
-                                                <a href="#settings" data-toggle="tab">系统设置</a>
-                                            </li>
-                                            <li>
-                                                <div class="tab-close">
-                                                    <i class="fa fa-fw fa-close" title="关闭"></i>
-                                                </div>
-                                                <a href="#settings" data-toggle="tab">系统设置</a>
-                                            </li>
-                                            <li>
-                                                <div class="tab-close">
-                                                    <i class="fa fa-fw fa-close" title="关闭"></i>
-                                                </div>
-                                                <a href="#settings" data-toggle="tab">系统设置</a>
-                                            </li>
-                                            <li>
-                                                <div class="tab-close">
-                                                    <i class="fa fa-fw fa-close" title="关闭"></i>
-                                                </div>
-                                                <a href="#settings" data-toggle="tab">系统设置</a>
+                                            <li class="active">
+                                                <a href="#activity" data-toggle="tab">首页</a>
                                             </li>
                                         </ul>
                                     </div>
-                                    <span class="button-move-right glyphicon glyphicon-forward"></span>
+                                    <span class="button-move-right glyphicon glyphicon-forward menu-move-button" id="button-move-right"></span>
                                 </div>
                                 <div class="tab-content">
                                     <!--主页面iframe-->
@@ -388,9 +276,9 @@
             <!--页脚-->
             <footer class="main-footer">
                 <div class="pull-right hidden-xs">
-                    <b>Version</b> 2.3.0
+                    <b>Version</b> 1.0.0
                 </div>
-                <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+                <strong>Copyright &copy; 2016-2016 <a href="#">Yang</a>.</strong> 版权所有.
             </footer>
             <!--工具栏主体-->
             <!-- Control Sidebar -->
@@ -557,5 +445,12 @@
             </aside><!-- /.control-sidebar -->
             <div class="control-sidebar-bg"></div>
         </div>
+        <script type="text/javascript" src="<%=contextPath%>/js/bootstrap.contextmenu.js"></script>
+        <script type="text/javascript" src="<%=contextPath%>/js/menu-tab.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                $.fast.init();
+            })
+        </script>
     </body>
 </html>
