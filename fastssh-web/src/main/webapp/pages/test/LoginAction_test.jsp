@@ -3,8 +3,10 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script type="text/javascript">
+        </script>
     </head>
-    <body>
+    <body st>
         <div class="row">
             <div class="col-md-12">
                 <section class="content-header">

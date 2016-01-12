@@ -4,16 +4,6 @@
 <html>
     <head>
         <link rel="stylesheet" charset="utf-8" href="<%=contextPath%>/css/menu-tabs.css">
-        <!--iframes自动适应宽高-->
-        <script type="text/javascript" language="javascript">
-           function iFrameHeight() {
-                var ifm= document.getElementById("iframepage");
-                var subWeb = document.frames ? document.frames["iframepage"].document : ifm.contentDocument;
-                if(ifm != null && subWeb != null) {
-                    ifm.height = subWeb.body.scrollHeight;
-                }
-           }
-        </script>
         <title>FastSSH 管理平台</title>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
@@ -261,9 +251,9 @@
                                     </div>
                                     <span class="button-move-right glyphicon glyphicon-forward menu-move-button" id="button-move-right"></span>
                                 </div>
-                                <div class="tab-content">
+                                <div class="tab-content" id="iframe-tab-content">
                                     <!--主页面iframe-->
-                                    <iframe src="<%=contextPath%>/test.html" id="iframepage" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" onload="iFrameHeight()" width="99%">
+                                    <iframe src="<%=contextPath%>/test.html" id="iframe_1" class="iframe-menu" data-tab="tabs-1" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="99%">
 
                                     </iframe>
                                 </div>
@@ -447,6 +437,7 @@
         </div>
         <script type="text/javascript" src="<%=contextPath%>/js/bootstrap.contextmenu.js"></script>
         <script type="text/javascript" src="<%=contextPath%>/js/menu-tab.js"></script>
+        <script type="text/javascript" src="<%=contextPath%>/js/pym.js"></script>
         <script type="text/javascript">
             $(function(){
                 $.fast.init();

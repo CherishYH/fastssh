@@ -44,7 +44,7 @@
         <title><sitemesh:write property='title'/></title>
         <script type="text/javascript">
             //全局Root Path变量
-            var contextPath = "<%=contextPath%>";
+            var contextPath = "<%=contextPath%>/";
         </script>
     </head>
     <body class="<sitemesh:write property='body.class'/>">
